@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Vulnerable Web App</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <section>
+        <script>
+
+          var username=document.URL.indexOf("Name=")+5;
+          var user = unescape(document.URL.substring(username));
+          function encode(r){
+            return r.replace(/[\x26\x0A\<>'"]/g,
+            function(r){return"&#"+r.charCodeAt(0)+";"})
+              }
+              
+          function fun1() {
+            var uname1 = document.getElementById('nname').value;
+            //the mitigation for xss: replacing the script tags with a % sign to disable embedded script tags
+            var mitigation = uname1.replace(/[\x26\x0A\<>'"]/g,"%");
+            window.location.href="mainpage.html?Name="+mitigation
+          }
+
+          </script>
+          <div class="Centeralign">
+          <h3>Welcome to the Items Directory Machine </h3>
+          <h4>Please Enter your Name </h4>
+          <input type="text" id="nname" value="" /> 
+          <button onclick="fun1()">Go</button>
+        </div>
+        </section>
+</body>
