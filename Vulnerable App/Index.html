@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,22 +11,12 @@
   <body>
     <section>
         <script>
-
           var username=document.URL.indexOf("Name=")+5;
           var user = unescape(document.URL.substring(username));
-          function encode(r){
-            return r.replace(/[\x26\x0A\<>'"]/g,
-            function(r){return"&#"+r.charCodeAt(0)+";"})
-              }
-              
           function fun1() {
             var uname1 = document.getElementById('nname').value;
-            //the mitigation for xss: replacing the script tags with a % sign to disable embedded script tags
-            var mitigation = uname1.replace(/[\x26\x0A\<>'"]/g,"%");
-            window.location.href="mainpage.html?Name="+mitigation
-          }
-
-          </script>
+            window.location.href="mainpage.html?Name="+uname1
+          }</script>
           <div class="Centeralign">
           <h3>Welcome to the Items Directory Machine </h3>
           <h4>Please Enter your Name </h4>
